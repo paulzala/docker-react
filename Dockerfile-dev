@@ -1,0 +1,11 @@
+FROM node:lts-alpine
+# Remember, to run this, run
+# docker build -f Dockerfile-dev .
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+CMD ["npm", "run", "start"]
