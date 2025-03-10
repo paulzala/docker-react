@@ -1,0 +1,23 @@
+version: '3'
+# named -dev because Amazon Lunix platforms look for a docker compose file instead of a Dockerfile by default and causes conflict.
+# Should be targeted with eg: docker-composer -f docker-composer-dev.yml up
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+    ports: 
+    - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+  web-test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: npm run test
